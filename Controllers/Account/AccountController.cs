@@ -3,15 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using CvManager.Data;
 using CvManager.Models;
 using CvManager.ViewModels;
+using CvManager.Interfaces;
 
 namespace CvManager.Controllers.Account
 {
     public class AccountController : Controller
     {
-        private readonly BaseContext _baseContext;
-        public AccountController(BaseContext baseContext)
+        private readonly IAccountService _accountService;
+        public AccountController(IAccountService accountService)
         {
-            _baseContext = baseContext;
+            _accountService = accountService;
         }
 
         [HttpGet]
@@ -21,8 +22,13 @@ namespace CvManager.Controllers.Account
         }
 
         [HttpPost]
-        public IActionResult Register(UserVM userVM)
+        public async Task<IActionResult> Register(UserVM userVM)
         {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+
+            var user = await _accountService.Register(userVM);
             return View();
         }
     }

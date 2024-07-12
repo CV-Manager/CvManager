@@ -14,14 +14,17 @@ namespace CvManager.Services
         {          
             _context = context;
         }
-        public Task<User> Register(UserVM user)
+        public async Task<User> Register(UserVM user)
         {
-            User userRegistration = new User (
-                user.Country,
-                user.Email,
-                user.Password,
-                
-            );
+            User userRegistration = new User() {
+                Country = user.Country,
+                Email = user.Email,
+                Password = user.Password
+            };              
+            
+            await _context.Users.AddAsync(userRegistration);
+            await _context.SaveChangesAsync();            
+            return userRegistration;
         }
     }
 }
