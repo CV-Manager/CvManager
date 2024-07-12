@@ -1,0 +1,31 @@
+@model CvManager.ViewModels.UserVM;
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Registrarse
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="pais" class="form-label">País</label>
+                        <input type="text" class="form-control" id="pais" name="pais" required asp-for="Country">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" required asp-for="Email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required asp-for="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
