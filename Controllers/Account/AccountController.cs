@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CvManager.Data;
 using CvManager.Models;
+using CvManager.ViewModels;
 
 namespace CvManager.Controllers.Account
 {
@@ -13,13 +14,14 @@ namespace CvManager.Controllers.Account
             _baseContext = baseContext;
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        public IActionResult Login()
+        [HttpPost]
+        public IActionResult Register(UserVM userVM)
         {
             return View();
         }
