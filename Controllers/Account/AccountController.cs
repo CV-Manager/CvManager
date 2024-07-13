@@ -29,6 +29,12 @@ namespace CvManager.Controllers.Account
             }
 
             var user = await _accountService.Register(userVM);
+
+            if(user.Id != 0){
+                return RedirectToAction("Account", "Login");
+            }
+
+            ViewData["Message"] = "No se pudo registrar el usuario, error.";
             return View();
         }
     }

@@ -10,7 +10,7 @@
                 Registrarse
             </div>
             <div class="card-body">
-                <form>
+                <form asp-controller="Account" asp-action="Register" method="post">
                     <div class="mb-3">
                         <label for="pais" class="form-label">País</label>
                         <input type="text" class="form-control" id="pais" name="pais" required asp-for="Country">
@@ -21,9 +21,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required asp-for="Password">
+                        <input type="password" class="form-control" id="password" name="password" required
+                            asp-for="Password">
                     </div>
+                    @if (ViewData["Message"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["Message"]
+                        </div>
+                    }
                     <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <div id="goToLogin" class="form-text">¿Ya tienes cuenta? <a asp-controller="Account" asp-action="Login" method="get">Inicia sesión</a></div>
                 </form>
             </div>
         </div>

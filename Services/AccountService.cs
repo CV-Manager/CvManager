@@ -23,7 +23,7 @@ namespace CvManager.Services
             };              
             
             await _context.Users.AddAsync(userRegistration);
-            await _context.SaveChangesAsync();            
+            await _context.SaveChangesAsync();          
             return userRegistration;
         }
     }

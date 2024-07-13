@@ -1,5 +1,8 @@
 using CvManager.Data;
+using CvManager.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,7 @@ builder.Services.AddSession(options => {
 });
 
 // Add SCOPED
+builder.Services.AddServices(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
