@@ -17,14 +17,14 @@
                     </div>
                     <div class="card-body">
                         <form asp-controller="Account" asp-action="Login" method="post">
-                            <div class="mb-3">
-                                <label for="Email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email">
+                            <div class="mb-3 form-group">
+                                <!--label for="Email" class="form-label">Correo electrónico</label-->
+                                <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email" placeholder="Correo electrónico">
                             </div>
-                            <div class="mb-3">
-                                <label for="Password" class="form-label">Password</label>
+                            <div class="mb-3 form-group">
+                                <!--label for="Password" class="form-label">Contraseña</label-->
                                 <input type="password" class="form-control" id="Password" name="Password" required
-                                    asp-for="Password">
+                                    asp-for="Password" placeholder="Contraseña">
                             </div>
                             @if (ViewData["Message"] != null)
                             {
