@@ -1,39 +1,54 @@
 @model CvManager.ViewModels.UserVM;
 @{
     ViewData["Title"] = "Register";
+    Layout = "";
 }
 
-<div class="row mt-5 justify-content-center">
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-header">
-                Registrarse
-            </div>
-            <div class="card-body">
-                <form asp-controller="Account" asp-action="Register" method="post">
-                    <div class="mb-3">
-                        <label for="Country" class="form-label">País</label>
-                        <input type="text" class="form-control" id="Country" name="Country" required asp-for="Country">
+<html>
+    <head>
+        <title>Registrarse</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        Registrarse
                     </div>
-                    <div class="mb-3">
-                        <label for="Email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email">
+                    <div class="card-body">
+                        <form asp-controller="Account" asp-action="Register" method="post">
+                            <div class="mb-3">
+                                <label for="Country" class="form-label">País</label>
+                                <input type="text" class="form-control" id="Country" name="Country" required
+                                    asp-for="Country">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="Password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="Password" name="Password" required
+                                    asp-for="Password">
+                            </div>
+                            @if (ViewData["Message"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewData["Message"]
+                                </div>
+                            }
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary">Registrarse</button>
+                            </div>
+                            <div id="goToLogin" class="form-text">¿Ya tienes cuenta? <a asp-controller="Account"
+                                    asp-action="Login">Inicia sesión</a></div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="Password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="Password" name="Password" required
-                            asp-for="Password">
-                    </div>
-                    @if (ViewData["Message"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["Message"]
-                        </div>
-                    }
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
-                    <div id="goToLogin" class="form-text">¿Ya tienes cuenta? <a asp-controller="Account" asp-action="Login" method="get">Inicia sesión</a></div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
