@@ -12,16 +12,16 @@
             <div class="card-body">
                 <form asp-controller="Account" asp-action="Register" method="post">
                     <div class="mb-3">
-                        <label for="pais" class="form-label">País</label>
-                        <input type="text" class="form-control" id="pais" name="pais" required asp-for="Country">
+                        <label for="Country" class="form-label">País</label>
+                        <input type="text" class="form-control" id="Country" name="Country" required asp-for="Country">
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" required asp-for="Email">
+                        <label for="Email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email">
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required
+                        <label for="Password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="Password" name="Password" required
                             asp-for="Password">
                     </div>
                     @if (ViewData["Message"] != null)
