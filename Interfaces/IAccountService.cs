@@ -5,6 +5,7 @@ namespace CvManager.Interfaces
 {
     public interface IAccountService
     {
-        Task<User> Register(UserVM user);
+        Task<User> Register(RegisterVM user);
+        Task<User> Login(LoginVM user);
     }
 }

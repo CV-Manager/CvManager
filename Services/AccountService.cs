@@ -14,7 +14,19 @@ namespace CvManager.Services
         {          
             _context = context;
         }
-        public async Task<User> Register(UserVM user)
+
+        public async Task<User> Login(LoginVM user)
+        {
+            User? userFind = await _context.Users
+            .Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefaultAsync();
+            if (userFind != null)
+            {
+                return userFind;
+            }
+            return null!;
+        }
+
+        public async Task<User> Register(RegisterVM user)
         {
             User userRegistration = new User() {
                 Country = user.Country,

@@ -1,4 +1,4 @@
-@model CvManager.ViewModels.UserVM;
+@model CvManager.ViewModels.RegisterVM;
 @{
     ViewData["Title"] = "Register";
     Layout = "";
@@ -6,7 +6,6 @@
 
 <html>
     <head>
-        <title>Registrarse</title>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     </head>
     <body>
@@ -14,7 +13,7 @@
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-header">
-                        Registrarse
+                        Regístrate
                     </div>
                     <div class="card-body">
                         <form asp-controller="Account" asp-action="Register" method="post">
@@ -39,7 +38,7 @@
                                 </div>
                             }
                             <div class="d-grid gap-2 mb-3">
-                                <button type="submit" class="btn btn-primary">Registrarse</button>
+                                <button type="submit" class="btn btn-primary">Registrarme</button>
                             </div>
                             <div id="goToLogin" class="form-text">¿Ya tienes cuenta? <a asp-controller="Account"
                                     asp-action="Login">Inicia sesión</a></div>
