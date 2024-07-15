@@ -1,4 +1,4 @@
-namespace CVManager.Models
+namespace CvManager.Models
 {
     public class Skill
     {

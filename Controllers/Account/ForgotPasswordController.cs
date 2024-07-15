@@ -1,4 +1,4 @@
-namespace CVManager.Controllers.Account
+namespace CvManager.Controllers.Account
 {
     public class ForgotPasswordController
     {

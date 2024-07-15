@@ -1,4 +1,4 @@
-namespace CVManager.Controllers.CV
+namespace CvManager.Controllers.CV
 {
     public class DownloadController
     {

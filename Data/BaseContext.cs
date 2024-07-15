@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using CVManager.Models;
+using CvManager.Models;
 
-namespace CVManager.Data;
+namespace CvManager.Data;
 
 public class BaseContext : DbContext
 {

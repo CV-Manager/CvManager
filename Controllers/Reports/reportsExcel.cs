@@ -1,4 +1,4 @@
-namespace CVManager.Controllers.Reports
+namespace CvManager.Controllers.Reports
 {
     public class reportsExcel
     {
