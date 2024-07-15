@@ -1,48 +1,38 @@
-@model CvManager.ViewModels.LoginVM;
+@model CvManager.ViewModels.LoginVM
 @{
     ViewData["Title"] = "Login";
-    Layout = "";
+    Layout = "_Layout";
 }
 
-<html>
-    <head>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    </head>
-    <body>
-        <div class="row mt-5 justify-content-center">
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-header">
-                        Iniciar sesión
+<div class="row mt-5 justify-content-center">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                Iniciar sesión
+            </div>
+            <div class="card-body">
+                <form asp-controller="Account" asp-action="Login" method="post">
+                    <div class="mb-3 form-group">
+                        <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email" placeholder="Correo electrónico">
                     </div>
-                    <div class="card-body">
-                        <form asp-controller="Account" asp-action="Login" method="post">
-                            <div class="mb-3 form-group">
-                                <!--label for="Email" class="form-label">Correo electrónico</label-->
-                                <input type="email" class="form-control" id="Email" name="Email" required asp-for="Email" placeholder="Correo electrónico">
-                            </div>
-                            <div class="mb-3 form-group">
-                                <!--label for="Password" class="form-label">Contraseña</label-->
-                                <input type="password" class="form-control" id="Password" name="Password" required
-                                    asp-for="Password" placeholder="Contraseña">
-                            </div>
-                            @if (ViewData["Message"] != null)
-                            {
-                                <div class="alert alert-danger" role="alert">
-                                    @ViewData["Message"]
-                                </div>
-                            }
-                            <div class="d-grid gap-2 mb-3">
-                                <button type="submit" class="btn btn-primary">Ingresar</button>
-                            </div>
-                            <div id="goToLogin" class="form-text">¿Aún no tienes cuenta? <a asp-controller="Account"
-                                    asp-action="Register">Regístrate</a></div>
-                        </form>
+                    <div class="mb-3 form-group">
+                        <input type="password" class="form-control" id="Password" name="Password" required asp-for="Password" placeholder="Contraseña">
                     </div>
-                </div>
+                    @if (ViewData["Message"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["Message"]
+                        </div>
+                    }
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <a class="btn btn-danger" href="@Url.Action("LoginWithGoogle", "Account")">Ingresar con Google</a>
+                    </div>
+                    <div id="goToLogin" class="form-text">¿Aún no tienes cuenta? <a asp-controller="Account" asp-action="Register">Regístrate</a></div>
+                </form>
             </div>
         </div>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-</html>
+    </div>
+</div>
