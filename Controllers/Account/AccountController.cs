@@ -146,15 +146,15 @@ namespace CvManager.Controllers.Account
                     var user = await _accountService.GoogleLoginAsync(email, name, phone, address, country);
                     var claimsIdentity = new ClaimsIdentity(new[]
                     {
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Name, user.Name)
+                        new Claim(ClaimTypes.Email, user.Email!),
+                        new Claim(ClaimTypes.Name, user.Name!)
                     }, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-                    HttpContext.Session.SetString("UserId", user.Id.ToString());
-                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("UserId", user.Id.ToString()!);
+                    HttpContext.Session.SetString("UserEmail", user.Email!);
                     return RedirectToAction("Index", "Home");
                 }
             }
