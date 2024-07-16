@@ -26,8 +26,8 @@ builder.Services.AddAuthentication(options =>
     })
     .AddGoogle(options =>
     {
-        options.ClientId = builder.Configuration["GoogleKeys:ClientId"];
-        options.ClientSecret = builder.Configuration["GoogleKeys:ClientSecret"];
+        options.ClientId = builder.Configuration["GoogleKeys:ClientId"]!;
+        options.ClientSecret = builder.Configuration["GoogleKeys:ClientSecret"]!;
         options.CallbackPath = new PathString("/signin-google");
         options.Scope.Add("profile");
         options.Scope.Add("email");
