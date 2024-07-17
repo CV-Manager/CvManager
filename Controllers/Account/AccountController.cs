@@ -76,7 +76,7 @@ namespace CvManager.Controllers.Account
 
             if (user == null)
             {
-                ViewData["Message"] = "No se encontraron coincidencias.";
+                ViewData["Message"] = "Correo o contraseña incorrectos.";
                 return View();
             }
 
