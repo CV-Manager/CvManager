@@ -1,12 +1,13 @@
 
 CREATE TABLE Users (
     Id INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(45) NOT NULL,
-    Age VARCHAR(3) NOT NULL,
-    Email VARCHAR(100) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
+    Name VARCHAR(45),
+    Age VARCHAR(3),
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    Password VARCHAR(255),
     Phone VARCHAR(20),
-    Address VARCHAR(45) NOT NULL,
+    Address VARCHAR(45),
+    Country VARCHAR(20),
     Image BLOB,
     Status ENUM('ACTIVE', 'INACTIVE'),
     CreateAt DATETIME NOT NULL,

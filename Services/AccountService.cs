@@ -36,13 +36,14 @@ namespace CvManager.Services
             // Verifica si el correo electrónico ya está en uso
             if (await _context.Users.AnyAsync(u => u.Email == user.Email))
             {
-                throw new Exception("Email already in use.");
+                throw new Exception("El correo ya esta en uso.");
             }
 
             // Crea un nuevo usuario
             User userRegistration = new User
             {
                 Country = user.Country,
+                Name = user.Name,
                 Email = user.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(user.Password),
                 CreateAt = DateTime.UtcNow,
