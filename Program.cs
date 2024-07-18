@@ -2,6 +2,7 @@ using CvManager.Data;
 using CvManager.Extensions;
 using CvManager.Interfaces;
 using CvManager.Services;
+using CvManager.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,9 @@ builder.Services.AddDbContext<BaseContext>(options =>
         builder.Configuration.GetConnectionString("MySqlConnection"),
         Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.20-mysql"))
 );
+
+// AutoMapper configuration
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddSession(options =>
 {
