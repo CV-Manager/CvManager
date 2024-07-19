@@ -82,14 +82,14 @@ namespace CvManager.Services
         public async Task<User> Update(int id, UserVM userUpdate)
         {
             var user = await GetById(id);
-            if (user != null)
+            if (user == null)
             {
-                _mapper.Map(userUpdate, user);
-                user.UpdateAt = DateTime.Now;
-                await _context.SaveChangesAsync();
-                return user;
+                throw new Exception("El usuario no existe.");
             }
-            throw new Exception("El usuario no existe.");
+            _mapper.Map(userUpdate, user);
+            user.UpdateAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return user;
         }
     }
 }

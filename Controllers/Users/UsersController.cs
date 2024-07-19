@@ -44,11 +44,5 @@ namespace CvManager.Controllers.Users
             if (users.Any()) return View(users);
             return RedirectToAction("Index", "Home");
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
     }
 }

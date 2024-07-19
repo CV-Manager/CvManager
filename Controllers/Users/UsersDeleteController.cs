@@ -1,32 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using CvManager.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CvManager.Controllers.Users
 {
-    [Route("[controller]")]
     public class UsersDeleteController : Controller
     {
-        private readonly ILogger<UsersDeleteController> _logger;
+        private readonly IUsersService _usersService;
 
-        public UsersDeleteController(ILogger<UsersDeleteController> logger)
+        public UsersDeleteController(IUsersService usersService)
         {
-            _logger = logger;
+            _usersService = usersService;
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Delete(int id)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
+            _usersService.Delete(id);
+            return RedirectToAction("Index", "Users");
+        }        
     }
 }
