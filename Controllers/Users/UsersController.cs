@@ -1,20 +1,48 @@
+using CvManager.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CvManager.Controllers.Users
 {
-    [Route("[controller]")]
     public class UsersController : Controller
     {
-        private readonly ILogger<UsersController> _logger;
+        private readonly IUsersService _usersService;
 
-        public UsersController(ILogger<UsersController> logger)
+        public UsersController(IUsersService usersService)
         {
-            _logger = logger;
+            _usersService = usersService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string search)
         {
-            return View();
+            var users = await _usersService.GetAll();
+
+            if (users.Any())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    users = users.Where(u => u.Name!.Contains(search));
+                    return View(users);
+                }
+                return View(users);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var user = await _usersService.GetById(id);
+            if (user != null) return View(user);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Deleted()
+        {
+            var users = await _usersService.GetAllDeleted();
+            if (users.Any()) return View(users);
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
