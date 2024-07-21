@@ -16,21 +16,35 @@ namespace CvManager.Services
             _context = context;
         }
 
-        public async Task<User> Login(LoginVM user)
+        public async Task<User?> Login(LoginVM user)
         {
             // Busca el usuario por correo electrónico
             User? userFind = await _context.Users
                 .Where(u => u.Email == user.Email)
                 .FirstOrDefaultAsync();
 
-            // Verifica la contraseña del usuario
-            if (userFind != null && BCrypt.Net.BCrypt.Verify(user.Password, userFind.Password))
+            // Si el usuario no existe, retorna null
+            if (userFind == null)
+            {
+                return null;
+            }
+
+            // Si el usuario se registró con Google, simplemente retorna el usuario
+            if (userFind.ProvidedAccount == "GOOGLE")
             {
                 return userFind;
             }
-            return null!;
-        }
 
+            // Si el usuario no se registró con Google, verifica la contraseña
+            if (!string.IsNullOrEmpty(user.Password) && BCrypt.Net.BCrypt.Verify(user.Password, userFind.Password))
+            {
+                return userFind;
+            }
+
+            // Si no coincide la contraseña, retorna null
+            return null;
+        }
+        
         public async Task<User> Register(RegisterVM user)
         {
             // Verifica si el correo electrónico ya está en uso
@@ -48,6 +62,7 @@ namespace CvManager.Services
                 Password = BCrypt.Net.BCrypt.HashPassword(user.Password),
                 CreateAt = DateTime.UtcNow,
                 UpdateAt = DateTime.UtcNow,
+                ProvidedAccount = "INTERNO",
                 Status = "ACTIVE"
             };
 
@@ -73,6 +88,7 @@ namespace CvManager.Services
                     Address = address,
                     Country = country,
                     Status = "ACTIVE",
+                    ProvidedAccount = "GOOGLE",
                     CreateAt = DateTime.UtcNow,
                     UpdateAt = DateTime.UtcNow
                 };

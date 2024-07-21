@@ -1,0 +1,427 @@
+@using System.Security.Claims
+@model CvManager.Models.User
+
+@{
+    ViewData["Title"] = "Create Resume";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <title>@ViewData["Title"]</title>
+
+    <!-- Template Main CSS File -->
+    <link rel="stylesheet" href="~/css/formCreateCV.css">
+
+</head>
+
+<body>
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <div class="container-fluid">
+            <div class="row ms-5">
+                <div class="col-md-6 sideRightForm">
+                    <div class="mb-5 mt-3 linkDashboard text-center">
+                        <h5 class="linkNavboard">Dashboard</h5>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <input class="text-center mb-4 titleCV" placeholder="Untitled" />
+                        <i class="bi bi-pencil-fill ms-3 fs-4"></i>
+                    </div>
+
+                    <!-- Barra de progreso -->
+                    <div class="progress-container mb-5">
+                        <div class="d-flex flex-row align-items-center">
+                            <span id="progressPercentage" class="progress-percentage">0%</span>
+                            <span class="ms-2">Resume score</span>
+                        </div>
+                        <div class="progress">
+                            <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar"
+                                style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <form asp-action="Create" method="post">
+                        <div class="row">
+                            <h4 class="mb-3 titlePersonalDetails">
+                                <i class="bx bx-user fs-2 me-2"></i>
+                                Personal Details
+                            </h4>
+                            <p class="mb-4 descriptionPersonalDetails">
+                                Sea preciso y el empresario se pondrá en contacto con usted a través de esta información.
+                            </p>
+                            <div class="col-md-6 pe-5">
+                                <div class="form-group">
+                                    <label asp-for="Name">Name</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bxs-user fs-5'></i></span>
+                                        <input asp-for="Name" class="form-control"
+                                            value="@User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. David</div>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Age">Age</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bxs-calendar fs-5'></i></span>
+                                        <input asp-for="Age" class="form-control" type="number" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. 19</div>
+                                    <span asp-validation-for="Age" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Phone">Phone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bxs-phone fs-5'></i></span>
+                                        <input asp-for="Phone" class="form-control" type="tel" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g.+57 305 257 89 25 </div>
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Country">Country</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bx-world fs-5'></i></span>
+                                        <select class="form-control" id="Country" required asp-for="Country">
+                                            <option value="" disabled selected>Selecciona...</option>
+                                            <option value="AF">Afganistán</option>
+                                            <option value="AL">Albania</option>
+                                            <option value="DZ">Argelia</option>
+                                            <option value="AD">Andorra</option>
+                                            <option value="AO">Angola</option>
+                                            <option value="AG">Antigua y Barbuda</option>
+                                            <option value="AR">Argentina</option>
+                                            <option value="AM">Armenia</option>
+                                            <option value="AU">Australia</option>
+                                            <option value="AT">Austria</option>
+                                            <option value="AZ">Azerbaiyán</option>
+                                            <option value="BS">Bahamas</option>
+                                            <option value="BH">Baréin</option>
+                                            <option value="BD">Bangladés</option>
+                                            <option value="BB">Barbados</option>
+                                            <option value="BY">Bielorrusia</option>
+                                            <option value="BE">Bélgica</option>
+                                            <option value="BZ">Belice</option>
+                                            <option value="BJ">Benín</option>
+                                            <option value="BT">Bután</option>
+                                            <option value="BO">Bolivia</option>
+                                            <option value="BA">Bosnia y Herzegovina</option>
+                                            <option value="BW">Botsuana</option>
+                                            <option value="BR">Brasil</option>
+                                            <option value="BN">Brunéi</option>
+                                            <option value="BG">Bulgaria</option>
+                                            <option value="BF">Burkina Faso</option>
+                                            <option value="BI">Burundi</option>
+                                            <option value="CV">Cabo Verde</option>
+                                            <option value="KH">Camboya</option>
+                                            <option value="CM">Camerún</option>
+                                            <option value="CA">Canadá</option>
+                                            <option value="CF">República Centroafricana</option>
+                                            <option value="TD">Chad</option>
+                                            <option value="CL">Chile</option>
+                                            <option value="CN">China</option>
+                                            <option value="CO">Colombia</option>
+                                            <option value="KM">Comoras</option>
+                                            <option value="CG">República del Congo</option>
+                                            <option value="CR">Costa Rica</option>
+                                            <option value="HR">Croacia</option>
+                                            <option value="CU">Cuba</option>
+                                            <option value="CY">Chipre</option>
+                                            <option value="CZ">República Checa</option>
+                                            <option value="DK">Dinamarca</option>
+                                            <option value="DJ">Yibuti</option>
+                                            <option value="DM">Dominica</option>
+                                            <option value="DO">República Dominicana</option>
+                                            <option value="EC">Ecuador</option>
+                                            <option value="EG">Egipto</option>
+                                            <option value="SV">El Salvador</option>
+                                            <option value="GQ">Guinea Ecuatorial</option>
+                                            <option value="ER">Eritrea</option>
+                                            <option value="EE">Estonia</option>
+                                            <option value="SZ">Esuatini</option>
+                                            <option value="ET">Etiopía</option>
+                                            <option value="FJ">Fiyi</option>
+                                            <option value="FI">Finlandia</option>
+                                            <option value="FR">Francia</option>
+                                            <option value="GA">Gabón</option>
+                                            <option value="GM">Gambia</option>
+                                            <option value="GE">Georgia</option>
+                                            <option value="DE">Alemania</option>
+                                            <option value="GH">Ghana</option>
+                                            <option value="GR">Grecia</option>
+                                            <option value="GD">Granada</option>
+                                            <option value="GT">Guatemala</option>
+                                            <option value="GN">Guinea</option>
+                                            <option value="GW">Guinea-Bisáu</option>
+                                            <option value="GY">Guyana</option>
+                                            <option value="HT">Haití</option>
+                                            <option value="HN">Honduras</option>
+                                            <option value="HU">Hungría</option>
+                                            <option value="IS">Islandia</option>
+                                            <option value="IN">India</option>
+                                            <option value="ID">Indonesia</option>
+                                            <option value="IR">Irán</option>
+                                            <option value="IQ">Irak</option>
+                                            <option value="IE">Irlanda</option>
+                                            <option value="IL">Israel</option>
+                                            <option value="IT">Italia</option>
+                                            <option value="JM">Jamaica</option>
+                                            <option value="JP">Japón</option>
+                                            <option value="JO">Jordania</option>
+                                            <option value="KZ">Kazajistán</option>
+                                            <option value="KE">Kenia</option>
+                                            <option value="KI">Kiribati</option>
+                                            <option value="KP">Corea del Norte</option>
+                                            <option value="KR">Corea del Sur</option>
+                                            <option value="KW">Kuwait</option>
+                                            <option value="KG">Kirguistán</option>
+                                            <option value="LA">Laos</option>
+                                            <option value="LV">Letonia</option>
+                                            <option value="LB">Líbano</option>
+                                            <option value="LS">Lesoto</option>
+                                            <option value="LR">Liberia</option>
+                                            <option value="LY">Libia</option>
+                                            <option value="LI">Liechtenstein</option>
+                                            <option value="LT">Lituania</option>
+                                            <option value="LU">Luxemburgo</option>
+                                            <option value="MG">Madagascar</option>
+                                            <option value="MW">Malaui</option>
+                                            <option value="MY">Malasia</option>
+                                            <option value="MV">Maldivas</option>
+                                            <option value="ML">Malí</option>
+                                            <option value="MT">Malta</option>
+                                            <option value="MH">Islas Marshall</option>
+                                            <option value="MR">Mauritania</option>
+                                            <option value="MU">Mauricio</option>
+                                            <option value="MX">México</option>
+                                            <option value="FM">Micronesia</option>
+                                            <option value="MD">Moldavia</option>
+                                            <option value="MC">Mónaco</option>
+                                            <option value="MN">Mongolia</option>
+                                            <option value="ME">Montenegro</option>
+                                            <option value="MA">Marruecos</option>
+                                            <option value="MZ">Mozambique</option>
+                                            <option value="MM">Birmania</option>
+                                            <option value="NA">Namibia</option>
+                                            <option value="NR">Nauru</option>
+                                            <option value="NP">Nepal</option>
+                                            <option value="NL">Países Bajos</option>
+                                            <option value="NZ">Nueva Zelanda</option>
+                                            <option value="NI">Nicaragua</option>
+                                            <option value="NE">Níger</option>
+                                            <option value="NG">Nigeria</option>
+                                            <option value="NO">Noruega</option>
+                                            <option value="OM">Omán</option>
+                                            <option value="PK">Pakistán</option>
+                                            <option value="PW">Palaos</option>
+                                            <option value="PA">Panamá</option>
+                                            <option value="PG">Papúa Nueva Guinea</option>
+                                            <option value="PY">Paraguay</option>
+                                            <option value="PE">Perú</option>
+                                            <option value="PH">Filipinas</option>
+                                            <option value="PL">Polonia</option>
+                                            <option value="PT">Portugal</option>
+                                            <option value="QA">Catar</option>
+                                            <option value="RO">Rumania</option>
+                                            <option value="RU">Rusia</option>
+                                            <option value="RW">Ruanda</option>
+                                            <option value="KN">San Cristóbal y Nieves</option>
+                                            <option value="LC">Santa Lucía</option>
+                                            <option value="VC">San Vicente y las Granadinas</option>
+                                            <option value="WS">Samoa</option>
+                                            <option value="SM">San Marino</option>
+                                            <option value="ST">Santo Tomé y Príncipe</option>
+                                            <option value="SA">Arabia Saudita</option>
+                                            <option value="SN">Senegal</option>
+                                            <option value="RS">Serbia</option>
+                                            <option value="SC">Seychelles</option>
+                                            <option value="SL">Sierra Leona</option>
+                                            <option value="SG">Singapur</option>
+                                            <option value="SK">Eslovaquia</option>
+                                            <option value="SI">Eslovenia</option>
+                                            <option value="SB">Islas Salomón</option>
+                                            <option value="SO">Somalia</option>
+                                            <option value="ZA">Sudáfrica</option>
+                                            <option value="SS">Sudán del Sur</option>
+                                            <option value="ES">España</option>
+                                            <option value="LK">Sri Lanka</option>
+                                            <option value="SD">Sudán</option>
+                                            <option value="SR">Surinam</option>
+                                            <option value="SE">Suecia</option>
+                                            <option value="CH">Suiza</option>
+                                            <option value="SY">Siria</option>
+                                            <option value="TW">Taiwán</option>
+                                            <option value="TJ">Tayikistán</option>
+                                            <option value="TZ">Tanzania</option>
+                                            <option value="TH">Tailandia</option>
+                                            <option value="TL">Timor Oriental</option>
+                                            <option value="TG">Togo</option>
+                                            <option value="TO">Tonga</option>
+                                            <option value="TT">Trinidad y Tobago</option>
+                                            <option value="TN">Túnez</option>
+                                            <option value="TR">Turquía</option>
+                                            <option value="TM">Turkmenistán</option>
+                                            <option value="TV">Tuvalu</option>
+                                            <option value="UG">Uganda</option>
+                                            <option value="UA">Ucrania</option>
+                                            <option value="AE">Emiratos Árabes Unidos</option>
+                                            <option value="GB">Reino Unido</option>
+                                            <option value="US">Estados Unidos</option>
+                                            <option value="UY">Uruguay</option>
+                                            <option value="UZ">Uzbekistán</option>
+                                            <option value="VU">Vanuatu</option>
+                                            <option value="VA">Ciudad del Vaticano</option>
+                                            <option value="VE">Venezuela</option>
+                                            <option value="VN">Vietnam</option>
+                                            <option value="YE">Yemen</option>
+                                            <option value="ZM">Zambia</option>
+                                            <option value="ZW">Zimbabue</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. Brazil</div>
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Image">Image</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bx-image-alt fs-5'></i></span>
+                                        <input asp-for="Image" class="form-control" type="file" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. File</div>
+                                    <span asp-validation-for="Image" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bxs-envelope fs-5'></i></span>
+                                        <input asp-for="Email" class="form-control"
+                                            value="@User.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault()" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. d.machado@sample.br</div>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Address">Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bxs-home fs-5'></i></span>
+                                        <input asp-for="Address" class="form-control" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. Address 1</div>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="City">City</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class='bx bxs-city fs-5'></i></span>
+                                        <input asp-for="City" class="form-control" />
+                                    </div>
+                                    <div class="form-text exampleInput">e.g. Sao Paulo</div>
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="card-title fs-5 mb-3 mt-2">Professional Summary</h5>
+                        <div class="mb-5">
+                            <textarea class="form-control professionalSummaryTextarea" rows="5" placeholder="Summarize your professional experience and achievements..."></textarea>
+                        </div>
+
+                        <div class="section-title">
+                            <h4 class="mb-3 titleWorkExperience">
+                                <i class='bx bx-briefcase fs-2 me-2'></i>
+                                Work Experience
+                            </h4>
+                            <p class="mb-4 descriptionWorkExperience">
+                                Describa su experiencia relevante. Enumere sus logros con cifras y hechos (conseguido X
+                                haciendo Y, medido por Z).
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addEmploymentBtn">+ Add
+                                employment</button>
+                            <div id="employmentContainer"></div>
+                        </div>
+
+                        <div class="section-title">
+                            <h4 class="mb-3 titleEducation">
+                                <i class='bx bxs-graduation fs-2 me-2'></i>
+                                Education
+                            </h4>
+                            <p class="mb-4 descriptionEducation">
+                                Las ricas experiencias educativas que muestra en su currículum indican sus conocimientos y
+                                formación, así como el valor potencial que puede aportar a la empresa.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addEducationBtn">+ Add
+                                education</button>
+                            <div id="educationContainer"></div>
+                        </div>
+
+                        <div class="section-title">
+                            <h4 class="mb-3 titleSkills">
+                                <i class='bx bx-book-reader fs-2 me-2'></i>
+                                Skills
+                            </h4>
+                            <p class="mb-4 descriptionSkills">
+                                Describa de tres a cinco competencias que domine y que demuestren que cumple los requisitos
+                                del puesto. Asegúrese de que las competencias que enumera aquí son las competencias clave
+                                que requiere el puesto, como conocimientos de software e idiomas.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addSkillBtn">+ Add skill</button>
+                            <div id="skillsContainer"></div>
+                        </div>
+
+                        <div class="section-title">
+                            <h4 class="mb-3 titleCourse">
+                                <i class='bx bxs-institution fs-2 me-2'></i>
+                                Courses
+                            </h4>
+                            <p class="mb-4 descriptionCourse">
+                                Incluya cursos relevantes para el puesto al que está aplicando. Estos pueden ser cursos en
+                                línea, certificaciones, talleres, etc.
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addCourseBtn">+ Add one more
+                                course</button>
+                            <div id="coursesContainer"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-6 previewCVSide">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Preview</h4>
+                            <div id="previewName" class="preview-item"></div>
+                            <div id="previewAge" class="preview-item"></div>
+                            <div id="previewPhone" class="preview-item"></div>
+                            <div id="previewCountry" class="preview-item"></div>
+                            <div id="previewImage" class="preview-item"></div>
+                            <div id="previewEmail" class="preview-item"></div>
+                            <div id="previewAddress" class="preview-item"></div>
+                            <div id="previewCity" class="preview-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="~/js/createCV.js"></script>
+</body>
+
+</html>
