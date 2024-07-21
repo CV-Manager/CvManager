@@ -59,7 +59,7 @@
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-heart'></i>
+                    <i class='bx bx-file' ></i>
                     <span class="links_name">Crear CV</span>
                 </a>
                 <span class="tooltip">Crear CV</span>
@@ -84,7 +84,7 @@
                     <div class="profile-details">
                         <img src="profile.jpg" alt="profileImg">
                         <div class="name_job">
-                            <div class="name">@User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()</div>
+                            <div class="name" value=""></div>
                             <div class="job">Campo Profession</div>
                         </div>
                         <form asp-controller="Home" asp-action="Logout" method="post">

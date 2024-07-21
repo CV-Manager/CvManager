@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "Create Resume";
 }
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,17 +13,15 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <title>@ViewData["Title"]</title>
-
-    <!-- Template Main CSS File -->
     <link rel="stylesheet" href="~/css/formCreateCV.css">
-
+    <link rel="stylesheet" href="~/css/previewCV.css"> <!-- Archivo CSS separado -->
 </head>
 
 <body>
     @if (User.Identity!.IsAuthenticated)
     {
         <div class="container-fluid">
-            <div class="row ms-5">
+            <div class="row">
                 <div class="col-md-6 sideRightForm">
                     <div class="mb-5 mt-3 linkDashboard text-center">
                         <h5 class="linkNavboard">Dashboard</h5>
@@ -46,7 +43,7 @@
                         </div>
                     </div>
 
-                    <form asp-action="Create" method="post">
+                    <form id="resumeForm" method="post">
                         <div class="row">
                             <h4 class="mb-3 titlePersonalDetails">
                                 <i class="bx bx-user fs-2 me-2"></i>
@@ -57,39 +54,42 @@
                             </p>
                             <div class="col-md-6 pe-5">
                                 <div class="form-group">
-                                    <label asp-for="Name">Name</label>
+                                    <label for="Name">Name</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingrese su nombre completo."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bxs-user fs-5'></i></span>
-                                        <input asp-for="Name" class="form-control"
-                                            value="@User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()" />
+                                        <input id="Name" name="Name" class="form-control" value="@User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()" />
                                     </div>
                                     <div class="form-text exampleInput">e.g. David</div>
-                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Age">Age</label>
+                                    <label for="Age">Age</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingrese su edad actual."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bxs-calendar fs-5'></i></span>
-                                        <input asp-for="Age" class="form-control" type="number" />
+                                        <input id="Age" name="Age" class="form-control" type="number" />
                                     </div>
                                     <div class="form-text exampleInput">e.g. 19</div>
-                                    <span asp-validation-for="Age" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Phone">Phone</label>
+                                    <label for="Phone">Phone</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingrese su número de teléfono con el código de país."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bxs-phone fs-5'></i></span>
-                                        <input asp-for="Phone" class="form-control" type="tel" />
+                                        <input id="Phone" name="Phone" class="form-control" type="tel" />
                                     </div>
                                     <div class="form-text exampleInput">e.g.+57 305 257 89 25 </div>
-                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Country">Country</label>
+                                    <label for="Country">Country</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Seleccione su país de residencia."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bx-world fs-5'></i></span>
-                                        <select class="form-control" id="Country" required asp-for="Country">
-                                            <option value="" disabled selected>Selecciona...</option>
+                                        <select class="form-control" id="Country" name="Country" requiredasp-for="Country">
+                                            <option value="" disabled selected>Selecciona un país</option>
                                             <option value="AF">Afganistán</option>
                                             <option value="AL">Albania</option>
                                             <option value="DZ">Argelia</option>
@@ -285,68 +285,73 @@
                                         </select>
                                     </div>
                                     <div class="form-text exampleInput">e.g. Brazil</div>
-                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="Image">Image</label>
+                                    <label for="Image">Image</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Suba una imagen de perfil."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bx-image-alt fs-5'></i></span>
-                                        <input asp-for="Image" class="form-control" type="file" />
+                                        <input id="Image" name="Image" class="form-control" type="file" />
                                     </div>
                                     <div class="form-text exampleInput">e.g. File</div>
-                                    <span asp-validation-for="Image" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Email">Email</label>
+                                    <label for="Email">Email</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingrese su dirección de correo electrónico."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bxs-envelope fs-5'></i></span>
-                                        <input asp-for="Email" class="form-control"
-                                            value="@User.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault()" />
+                                        <input id="Email" name="Email" class="form-control" value="@User.Claims.Where(c => c.Type == ClaimTypes.Email).Select(c => c.Value).SingleOrDefault()" />
                                     </div>
                                     <div class="form-text exampleInput">e.g. d.machado@sample.br</div>
-                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Address">Address</label>
+                                    <label for="Address">Address</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingrese su dirección completa."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bxs-home fs-5'></i></span>
-                                        <input asp-for="Address" class="form-control" />
+                                        <input id="Address" name="Address" class="form-control" />
                                     </div>
                                     <div class="form-text exampleInput">e.g. Address 1</div>
-                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="City">City</label>
+                                    <label for="City">City</label>
+                                    <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Ingrese su ciudad de residencia."></a>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class='bx bxs-city fs-5'></i></span>
-                                        <input asp-for="City" class="form-control" />
+                                        <input id="City" name="City" class="form-control" />
                                     </div>
                                     <div class="form-text exampleInput">e.g. Sao Paulo</div>
-                                    <span asp-validation-for="City" class="text-danger"></span>
+                                    <span class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
 
-                        <h5 class="card-title fs-5 mb-3 mt-2">Professional Summary</h5>
-                        <div class="mb-5">
-                            <textarea class="form-control professionalSummaryTextarea" rows="5" placeholder="Summarize your professional experience and achievements..."></textarea>
+                            <label class="card-title fs-5 mb-3 mt-2">Professional Summary</label>
+                            <a type="button" class="bi bi-patch-question-fill ms-1 question" data-bs-toggle="tooltip" data-bs-placement="top" title="Resuma su experiencia profesional y logros."></a>
+                            <div class="mb-5">
+                                <textarea class="form-control professionalSummaryTextarea" rows="5" placeholder="Summarize your professional experience and achievements..."></textarea>
+                            </div>
                         </div>
 
                         <div class="section-title">
                             <h4 class="mb-3 titleWorkExperience">
                                 <i class='bx bx-briefcase fs-2 me-2'></i>
                                 Work Experience
+                                <a type="button" class="bi bi-patch-question-fill ms-1 question fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Describa su experiencia laboral relevante."></a>
                             </h4>
                             <p class="mb-4 descriptionWorkExperience">
-                                Describa su experiencia relevante. Enumere sus logros con cifras y hechos (conseguido X
-                                haciendo Y, medido por Z).
+                                Describa su experiencia relevante. Enumere sus logros con cifras y hechos (conseguido X haciendo Y, medido por Z).
                             </p>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-primary mb-4" id="addEmploymentBtn">+ Add
-                                employment</button>
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addEmploymentBtn">+ Add employment</button>
                             <div id="employmentContainer"></div>
                         </div>
 
@@ -354,15 +359,14 @@
                             <h4 class="mb-3 titleEducation">
                                 <i class='bx bxs-graduation fs-2 me-2'></i>
                                 Education
+                                <a type="button" class="bi bi-patch-question-fill ms-1 question fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Indique su historial educativo."></a>
                             </h4>
                             <p class="mb-4 descriptionEducation">
-                                Las ricas experiencias educativas que muestra en su currículum indican sus conocimientos y
-                                formación, así como el valor potencial que puede aportar a la empresa.
+                                Las ricas experiencias educativas que muestra en su currículum indican sus conocimientos y formación, así como el valor potencial que puede aportar a la empresa.
                             </p>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-primary mb-4" id="addEducationBtn">+ Add
-                                education</button>
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addEducationBtn">+ Add education</button>
                             <div id="educationContainer"></div>
                         </div>
 
@@ -370,11 +374,10 @@
                             <h4 class="mb-3 titleSkills">
                                 <i class='bx bx-book-reader fs-2 me-2'></i>
                                 Skills
+                                <a type="button" class="bi bi-patch-question-fill ms-1 question fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Describa de tres a cinco competencias que domine."></a>
                             </h4>
                             <p class="mb-4 descriptionSkills">
-                                Describa de tres a cinco competencias que domine y que demuestren que cumple los requisitos
-                                del puesto. Asegúrese de que las competencias que enumera aquí son las competencias clave
-                                que requiere el puesto, como conocimientos de software e idiomas.
+                                Describa de tres a cinco competencias que domine y que demuestren que cumple los requisitos del puesto. Asegúrese de que las competencias que enumera aquí son las competencias clave que requiere el puesto, como conocimientos de software e idiomas.
                             </p>
                         </div>
                         <div class="form-group">
@@ -386,34 +389,35 @@
                             <h4 class="mb-3 titleCourse">
                                 <i class='bx bxs-institution fs-2 me-2'></i>
                                 Courses
+                                <a type="button" class="bi bi-patch-question-fill ms-1 question fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Incluya cursos relevantes para el puesto al que está aplicando."></a>
                             </h4>
                             <p class="mb-4 descriptionCourse">
-                                Incluya cursos relevantes para el puesto al que está aplicando. Estos pueden ser cursos en
-                                línea, certificaciones, talleres, etc.
+                                Incluya cursos relevantes para el puesto al que está aplicando. Estos pueden ser cursos en línea, certificaciones, talleres, etc.
                             </p>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-primary mb-4" id="addCourseBtn">+ Add one more
-                                course</button>
+                            <button type="button" class="btn btn-outline-primary mb-4" id="addCourseBtn">+ Add one more course</button>
                             <div id="coursesContainer"></div>
                         </div>
                     </form>
                 </div>
 
                 <div class="col-md-6 previewCVSide">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Preview</h4>
-                            <div id="previewName" class="preview-item"></div>
-                            <div id="previewAge" class="preview-item"></div>
-                            <div id="previewPhone" class="preview-item"></div>
-                            <div id="previewCountry" class="preview-item"></div>
-                            <div id="previewImage" class="preview-item"></div>
-                            <div id="previewEmail" class="preview-item"></div>
-                            <div id="previewAddress" class="preview-item"></div>
-                            <div id="previewCity" class="preview-item"></div>
-                        </div>
+                    <div class="preview-header">
+                        <h4>Preview</h4>
+                        <button onclick="downloadPDF()">Descargar como PDF</button>
                     </div>
+                    
+                    <div class="preview-section">
+                        <div id="previewImage" class="preview-item"></div>
+                        <div id="previewName" class="preview-item"><h5>Name</h5></div>
+                        <div id="previewAge" class="preview-item"><h5>Age</h5></div>
+                        <div id="previewPhone" class="preview-item"><h5>Phone</h5></div>
+                        <div id="previewCountry" class="preview-item"><h5>Country</h5></div>
+                        <div id="previewEmail" class="preview-item"><h5>Email</h5></div>
+                        <div id="previewAddress" class="preview-item"><h5>Address</h5></div>
+                        <div id="previewCity" class="preview-item"><h5>City</h5></div>
+                    </div> 
                 </div>
             </div>
         </div>

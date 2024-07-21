@@ -1,82 +1,67 @@
-$(document).ready(function () {
-    // Actualizar la barra de progreso y la vista previa cuando se llenan los campos
-    $('body').on('input change', 'input, select, textarea', function () {
-        updateProgressBar();
-        updatePreview();
+document.addEventListener('DOMContentLoaded', function () {
+    document.body.addEventListener('input', function (event) {
+        if (event.target.matches('input, select, textarea')) {
+            updateProgressBar();
+            updatePreview();
+        }
     });
 
-    // Función para actualizar la barra de progreso
     function updateProgressBar() {
-        // Seleccionar todos los campos de entrada excepto los campos ocultos de token y otros campos irrelevantes
-        const relevantInputs = $('input:not([type=hidden]), select, textarea');
+        const relevantInputs = document.querySelectorAll('input:not([type=hidden]), select, textarea');
         const totalInputs = relevantInputs.length;
         let filledInputs = 0;
 
-        console.log('Total Inputs:', totalInputs); // Depuración: Mostrar el número total de campos
-
-        // Contar los campos llenos
-        relevantInputs.each(function () {
-            const fieldName = $(this).attr('name') || $(this).attr('id') || 'undefined';
-            const fieldValue = $(this).val();
-            console.log('Checking field:', fieldName, 'Value:', fieldValue); // Depuración: Mostrar el nombre y valor de cada campo
-            if (fieldValue !== '' && fieldValue !== null) {
+        relevantInputs.forEach(input => {
+            if (input.value.trim() !== '') {
                 filledInputs++;
-                console.log('Field is filled:', fieldName); // Depuración: Mostrar campo lleno
             }
         });
 
-        console.log('Filled Inputs:', filledInputs); // Depuración: Mostrar el número de campos llenos
-
-        // Calcular el porcentaje de progreso
         const progressPercentage = (filledInputs / totalInputs) * 100;
-        $('#progressBar').css('width', progressPercentage + '%');
-        $('#progressBar').attr('aria-valuenow', progressPercentage);
-        $('#progressPercentage').text(Math.round(progressPercentage) + '%');
+        const progressBar = document.getElementById('progressBar');
+        const progressPercentageText = document.getElementById('progressPercentage');
 
-        // Cambiar el color de la barra de progreso y del texto según el porcentaje
+        progressBar.style.width = progressPercentage + '%';
+        progressBar.setAttribute('aria-valuenow', progressPercentage);
+        progressPercentageText.textContent = Math.round(progressPercentage) + '%';
+
         let color;
         if (progressPercentage <= 25) {
-            color = '#dc3545'; // Rojo
+            color = '#dc3545';
         } else if (progressPercentage <= 50) {
-            color = '#ffc107'; // Amarillo
+            color = '#ffc107';
         } else if (progressPercentage <= 75) {
-            color = '#17a2b8'; // Azul
+            color = '#17a2b8';
         } else {
-            color = '#28a745'; // Verde
+            color = '#28a745';
         }
-        $('#progressBar').css('background-color', color);
-        $('#progressPercentage').css('background-color', color);
-        $('#progressPercentage').css('color', '#fff');
+
+        progressBar.style.backgroundColor = color;
+        progressPercentageText.style.backgroundColor = color;
+        progressPercentageText.style.color = '#fff';
     }
 
-    // Función para actualizar la vista previa en vivo
     function updatePreview() {
-        $('#previewName').text($('input[name="Name"]').val() || 'Name: N/A');
-        $('#previewAge').text($('input[name="Age"]').val() || 'Age: N/A');
-        $('#previewPhone').text($('input[name="Phone"]').val() || 'Phone: N/A');
-        $('#previewCountry').text($('#Country option:selected').text() || 'Country: N/A');
-        $('#previewEmail').text($('input[name="Email"]').val() || 'Email: N/A');
-        $('#previewAddress').text($('input[name="Address"]').val() || 'Address: N/A');
-        $('#previewCity').text($('input[name="City"]').val() || 'City: N/A');
+        document.getElementById('previewName').textContent = document.querySelector('input[name="Name"]').value || 'Name: N/A';
+        document.getElementById('previewAge').textContent = document.querySelector('input[name="Age"]').value || 'Age: N/A';
+        document.getElementById('previewPhone').textContent = document.querySelector('input[name="Phone"]').value || 'Phone: N/A';
+        document.getElementById('previewCountry').textContent = document.querySelector('#Country').selectedOptions[0]?.text || 'Country: N/A';
+        document.getElementById('previewEmail').textContent = document.querySelector('input[name="Email"]').value || 'Email: N/A';
+        document.getElementById('previewAddress').textContent = document.querySelector('input[name="Address"]').value || 'Address: N/A';
+        document.getElementById('previewCity').textContent = document.querySelector('input[name="City"]').value || 'City: N/A';
 
-        // Vista previa de la imagen
-        const imageInput = $('input[name="Image"]')[0];
-        if (imageInput.files && imageInput.files[0]) {
+        const imageInput = document.querySelector('input[name="Image"]');
+        if (imageInput && imageInput.files && imageInput.files[0]) {
             const reader = new FileReader();
             reader.onload = function (e) {
-                $('#previewImage').html('<img src="' + e.target.result + '" class="img-fluid" alt="Image Preview" />');
+                document.getElementById('previewImage').innerHTML = `<img src="${e.target.result}" class="img-fluid" alt="Image Preview" />`;
             }
             reader.readAsDataURL(imageInput.files[0]);
         } else {
-            $('#previewImage').text('Image: N/A');
+            document.getElementById('previewImage').textContent = 'Image: N/A';
         }
     }
 
-    // Inicializar la barra de progreso y la vista previa al cargar la página
-    updateProgressBar();
-    updatePreview();
-
-    // Función para agregar un nuevo bloque de empleo
     function addEmployment() {
         const employmentContainer = document.getElementById('employmentContainer');
         const employmentHtml = `
@@ -113,10 +98,9 @@ $(document).ready(function () {
             </div>`;
         employmentContainer.insertAdjacentHTML('beforeend', employmentHtml);
         attachRemoveEvent();
-        updateProgressBar(); // Actualizar la barra de progreso cuando se agrega un nuevo bloque
+        updateProgressBar();
     }
 
-    // Función para agregar un nuevo bloque de educación
     function addEducation() {
         const educationContainer = document.getElementById('educationContainer');
         const educationHtml = `
@@ -153,10 +137,9 @@ $(document).ready(function () {
             </div>`;
         educationContainer.insertAdjacentHTML('beforeend', educationHtml);
         attachRemoveEvent();
-        updateProgressBar(); // Actualizar la barra de progreso cuando se agrega un nuevo bloque
+        updateProgressBar();
     }
 
-    // Función para agregar un nuevo bloque de habilidades
     function addSkill() {
         const skillsContainer = document.getElementById('skillsContainer');
         const skillHtml = `
@@ -174,10 +157,9 @@ $(document).ready(function () {
             </div>`;
         skillsContainer.insertAdjacentHTML('beforeend', skillHtml);
         attachRemoveEvent();
-        updateProgressBar(); // Actualizar la barra de progreso cuando se agrega un nuevo bloque
+        updateProgressBar();
     }
 
-    // Función para agregar un nuevo bloque de cursos
     function addCourse() {
         const coursesContainer = document.getElementById('coursesContainer');
         const courseHtml = `
@@ -202,12 +184,11 @@ $(document).ready(function () {
             </div>`;
         coursesContainer.insertAdjacentHTML('beforeend', courseHtml);
         attachRemoveEvent();
-        updateProgressBar(); // Actualizar la barra de progreso cuando se agrega un nuevo bloque
+        updateProgressBar();
     }
 
-    // Función para adjuntar el evento de eliminación a los nuevos bloques
     function attachRemoveEvent() {
-        document.querySelectorAll('.removeEmploymentBtn, .removeEducationBtn, .removeSkillBtn, .removeCourseBtn').forEach(function (button) {
+        document.querySelectorAll('.removeEmploymentBtn, .removeEducationBtn, .removeSkillBtn, .removeCourseBtn').forEach(button => {
             button.addEventListener('click', function () {
                 button.closest('.card').remove();
                 updateProgressBar();
@@ -216,13 +197,11 @@ $(document).ready(function () {
         });
     }
 
-    // Eventos para añadir nuevos bloques
     document.getElementById('addEmploymentBtn').addEventListener('click', addEmployment);
     document.getElementById('addEducationBtn').addEventListener('click', addEducation);
     document.getElementById('addSkillBtn').addEventListener('click', addSkill);
     document.getElementById('addCourseBtn').addEventListener('click', addCourse);
 
-    // Inicializar la barra de progreso y la vista previa al cargar la página
     updateProgressBar();
     updatePreview();
 });

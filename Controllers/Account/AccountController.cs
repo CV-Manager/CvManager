@@ -85,6 +85,8 @@ namespace CvManager.Controllers.Account
                 new Claim(ClaimTypes.Email, user.Email!)
             };
 
+            Console.WriteLine(claims);
+
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var properties = new AuthenticationProperties
             {
