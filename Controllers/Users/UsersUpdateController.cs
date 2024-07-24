@@ -35,8 +35,7 @@ namespace CvManager.Controllers.Users
             
             try
             {
-                var user = await _usersService.Update(id, userVM);
-                if (user == null) return NotFound();
+                await _usersService.Update(id, userVM);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

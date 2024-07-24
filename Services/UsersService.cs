@@ -18,7 +18,7 @@ namespace CvManager.Services
             _mapper = mapper;            
         }
 
-        public async Task<User> Delete(int id)
+        public async Task Delete(int id)
         {
             var user = await GetById(id);
             if (user!= null)
@@ -32,7 +32,6 @@ namespace CvManager.Services
                     user.Status = "INACTIVE";
                     user.UpdateAt = DateTime.Now;
                     await _context.SaveChangesAsync();
-                    return user;
                 }
             }
             throw new Exception("El usuario no existe.");
@@ -79,7 +78,7 @@ namespace CvManager.Services
             throw new Exception("El usuario no existe.");
         }
 
-        public async Task<User> Update(int id, UserVM userUpdate)
+        public async Task Update(int id, UserVM userUpdate)
         {
             var user = await GetById(id);
             if (user == null)
@@ -89,7 +88,6 @@ namespace CvManager.Services
             _mapper.Map(userUpdate, user);
             user.UpdateAt = DateTime.Now;
             await _context.SaveChangesAsync();
-            return user;
         }
     }
 }
