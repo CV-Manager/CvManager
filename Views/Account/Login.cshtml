@@ -16,18 +16,18 @@
           </a>
         </div>
 
-        <div class="card mb-3 px-3">
+        <div class="card mb-3 px-3 p-4">
 
           <div class="card-body">
 
-            <div class="pt-4 pb-2">
-              <h5 class="card-title text-center text-black pb-0 fs-4">Inicia sesión en tu cuenta</h5>
+            <div class="pt-2 pb-3 mb-4">
+              <h1 class="card-title text-center text-black pb-0 fs-3">Inicia Sesión</h1>
             </div>
 
             <form class="row g-3 needs-validation" novalidate asp-controller="Account" asp-action="Login"
               method="post">
 
-              <div class="col-12">
+              <div class="col-12 mb-2">
                 <!--label for="Email" class="form-label">Correo electrónico</label-->
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="ri-mail-line"></i></span>
@@ -36,7 +36,7 @@
                 </div>
               </div>
 
-              <div class="col-12">
+              <div class="col-12 mb-2">
                 <!--label for="Password" class="form-label">Password</label-->
                 <input type="password" class="form-control" id="Password" name="Password" asp-for="Password" placeholder="Contraseña" required>
                 <div class="invalid-feedback">Por favor ingresa tu contraseña.</div>
@@ -50,7 +50,7 @@
               <div class="col-12">
                 <button class="btn btn-outline-primary w-100" type="submit">Ingresar</button>
               </div>
-              <div class="col-12">
+              <div class="col-12 mb-2">
                 <a class="btn btn-primary w-100 d-flex align-items-center position-relative" href="@Url.Action("LoginWithGoogle", "Account")">
                   <i class="bx bxl-google position-absolute start-0 ms-2"></i>
                   <span class="mx-auto">Ingresar con Google</span>
