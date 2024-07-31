@@ -14,8 +14,8 @@ namespace CvManager.Models
         public byte[]? Image { get; set; }
         public string? ProvidedAccount { get; set; }
         public string? Status { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime CreateAt { get; set; } = DateTime.Now;
+        public DateTime UpdateAt { get; set; } = DateTime.Now;
 
         public ICollection<Education>? Educations { get; set; }
         public ICollection<ExtraCourse>? ExtraCourses { get; set; }

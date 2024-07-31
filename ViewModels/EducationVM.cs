@@ -9,6 +9,7 @@ namespace CvManager.ViewModels
         public DateTime EndDate { get; set; }
         public string? Description { get; set; }
         public string? Status { get; set; }
+        public DateTime UpdateAt { get; set; } = DateTime.Now;
     }
 
 }

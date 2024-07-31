@@ -39,7 +39,7 @@ class Animator {
             }
         });
     }
- _update(date = Date.now()) {
+ _update(date = Date.Now) {
         let remaining = 0;
         this._charts.forEach((anims, chart)=>{
             if (!anims.running || !anims.items.length) {
@@ -113,7 +113,7 @@ class Animator {
             return;
         }
         anims.running = true;
-        anims.start = Date.now();
+        anims.start = Date.Now;
         anims.duration = anims.items.reduce((acc, cur)=>Math.max(acc, cur._duration), 0);
         this._refresh();
     }
@@ -138,7 +138,7 @@ class Animator {
             items[i].cancel();
         }
         anims.items = [];
-        this._notify(chart, anims, Date.now(), 'complete');
+        this._notify(chart, anims, Date.Now, 'complete');
     }
  remove(chart) {
         return this._charts.delete(chart);
@@ -177,7 +177,7 @@ class Animation {
         this._active = true;
         this._fn = cfg.fn || interpolators[cfg.type || typeof from];
         this._easing = helpers_segment.effects[cfg.easing] || helpers_segment.effects.linear;
-        this._start = Math.floor(Date.now() + (cfg.delay || 0));
+        this._start = Math.floor(Date.Now + (cfg.delay || 0));
         this._duration = this._total = Math.floor(cfg.duration);
         this._loop = !!cfg.loop;
         this._target = target;
@@ -214,7 +214,7 @@ class Animation {
     }
     cancel() {
         if (this._active) {
-            this.tick(Date.now());
+            this.tick(Date.Now);
             this._active = false;
             this._notify(false);
         }
@@ -310,7 +310,7 @@ class Animations {
         const animations = [];
         const running = target.$animations || (target.$animations = {});
         const props = Object.keys(values);
-        const date = Date.now();
+        const date = Date.Now;
         let i;
         for(i = props.length - 1; i >= 0; --i){
             const prop = props[i];
@@ -11130,8 +11130,8 @@ class TimeScale extends Scale {
                 _applyBounds(this.getMinMax(false));
             }
         }
-        min = helpers_segment.isNumberFinite(min) && !isNaN(min) ? min : +adapter.startOf(Date.now(), unit);
-        max = helpers_segment.isNumberFinite(max) && !isNaN(max) ? max : +adapter.endOf(Date.now(), unit) + 1;
+        min = helpers_segment.isNumberFinite(min) && !isNaN(min) ? min : +adapter.startOf(Date.Now, unit);
+        max = helpers_segment.isNumberFinite(max) && !isNaN(max) ? max : +adapter.endOf(Date.Now, unit) + 1;
         this.min = Math.min(min, max - 1);
         this.max = Math.max(min + 1, max);
     }

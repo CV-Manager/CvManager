@@ -39,8 +39,6 @@ builder.Services.AddAuthentication(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<ICVService, CVService>();
 
 // Conexión a la base de datos
 builder.Services.AddDbContext<BaseContext>(options =>
@@ -85,6 +83,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=CV}/{action=Create}/{id?}");
+    pattern: "{controller=Cv}/{action=Create}/{id?}");
 
 app.Run();

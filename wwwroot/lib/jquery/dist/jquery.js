@@ -5750,7 +5750,7 @@ jQuery.Event = function( src, props ) {
 	}
 
 	// Create a timestamp if incoming event doesn't have one
-	this.timeStamp = src && src.timeStamp || Date.now();
+	this.timeStamp = src && src.timeStamp || Date.Now;
 
 	// Mark it as fixed
 	this[ jQuery.expando ] = true;
@@ -7284,11 +7284,11 @@ function schedule() {
 }
 
 // Animations created synchronously will run synchronously
-function createFxNow() {
+function createFxNow {
 	window.setTimeout( function() {
 		fxNow = undefined;
 	} );
-	return ( fxNow = Date.now() );
+	return ( fxNow = Date.Now );
 }
 
 // Generate parameters to create a standard animation
@@ -7549,7 +7549,7 @@ function Animation( elem, properties, options ) {
 			if ( stopped ) {
 				return false;
 			}
-			var currentTime = fxNow || createFxNow(),
+			var currentTime = fxNow || createFxNow,
 				remaining = Math.max( 0, animation.startTime + animation.duration - currentTime ),
 
 				// Support: Android 2.3 only
@@ -7588,7 +7588,7 @@ function Animation( elem, properties, options ) {
 			}, options ),
 			originalProperties: properties,
 			originalOptions: options,
-			startTime: fxNow || createFxNow(),
+			startTime: fxNow || createFxNow,
 			duration: options.duration,
 			tweens: [],
 			createTween: function( prop, end ) {
@@ -7897,7 +7897,7 @@ jQuery.fx.tick = function() {
 		i = 0,
 		timers = jQuery.timers;
 
-	fxNow = Date.now();
+	fxNow = Date.Now;
 
 	for ( ; i < timers.length; i++ ) {
 		timer = timers[ i ];
@@ -8852,7 +8852,7 @@ if ( !support.focusin ) {
 }
 var location = window.location;
 
-var nonce = { guid: Date.now() };
+var nonce = { guid: Date.Now };
 
 var rquery = ( /\?/ );
 

@@ -58,7 +58,7 @@ html {
     margin: 0;
 }
 
-.titleCV {
+.titleCv {
     width: auto;
     font-size: 1.3vw;
     border-top: none;
@@ -69,7 +69,7 @@ html {
     transition: border-bottom-color 0.5s ease-in-out, border-bottom-width 0.3s ease-in-out;
 }
 
-.titleCV:focus {
+.titleCv:focus {
     border-bottom-color: #11101D;
     border-bottom-width: 4px;
 }
@@ -169,7 +169,7 @@ html {
     color: white;
 }
 
-.previewCVSide {
+.previewCvSide {
     background-color: #11101D;
     color: #f8f9fa;
     padding: 20px;

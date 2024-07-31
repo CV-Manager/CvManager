@@ -6,7 +6,6 @@ namespace CvManager.ViewModels
         public string? SkillName { get; set; }
         public string? ProficiencyLevel { get; set; }
         public string? Status { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime UpdateAt { get; set; } = DateTime.Now;
     }
 }

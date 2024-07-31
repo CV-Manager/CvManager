@@ -23,7 +23,7 @@ namespace CvManager.Controllers.Account
         public IActionResult Register()
         {
             if (User.Identity!.IsAuthenticated)
-                return RedirectToAction("Create", "CV");
+                return RedirectToAction("Create", "Cv");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace CvManager.Controllers.Account
         public IActionResult Login()
         {
             if (User.Identity!.IsAuthenticated)
-                return RedirectToAction("Create", "CV");
+                return RedirectToAction("Create", "Cv");
             return View();
         }
 
@@ -96,7 +96,7 @@ namespace CvManager.Controllers.Account
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 
-            return RedirectToAction("Create", "CV");
+            return RedirectToAction("Create", "Cv");
         }
 
         [HttpPost]
@@ -157,7 +157,7 @@ namespace CvManager.Controllers.Account
 
                     HttpContext.Session.SetString("UserId", user.Id.ToString()!);
                     HttpContext.Session.SetString("UserEmail", user.Email!);
-                    return RedirectToAction("Create", "CV");
+                    return RedirectToAction("Create", "Cv");
                 }
             }
 

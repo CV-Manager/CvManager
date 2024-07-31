@@ -17100,7 +17100,7 @@
       this.xaxisTooltip = null;
       this.yaxisTTEls = null;
       this.isBarShared = !w.globals.isBarHorizontal && this.tConfig.shared;
-      this.lastHoverTime = Date.now();
+      this.lastHoverTime = Date.Now;
     }
     _createClass(Tooltip, [{
       key: "getElTooltip",
@@ -17355,7 +17355,7 @@
         // If a user is moving their mouse quickly, don't bother updating the tooltip every single frame
 
         var targetDelay = 100;
-        var timeSinceLastUpdate = Date.now() - this.lastHoverTime;
+        var timeSinceLastUpdate = Date.Now - this.lastHoverTime;
         if (timeSinceLastUpdate >= targetDelay) {
           // The tooltip was last updated over 100ms ago - redraw it even if the user is still moving their
           // mouse so they get some feedback that their moves are being registered
@@ -17379,7 +17379,7 @@
       key: "seriesHover",
       value: function seriesHover(opt, e) {
         var _this3 = this;
-        this.lastHoverTime = Date.now();
+        this.lastHoverTime = Date.Now;
         var chartGroups = [];
         var w = this.w;
 
@@ -20046,7 +20046,7 @@
         }
         var yRatio = this.yRatio[indexes.translationsIndex];
         var realIndex = indexes.realIndex;
-        var ohlc = this.getOHLCValue(realIndex, j);
+        var ohlc = this.getOHLCvalue(realIndex, j);
         var l1 = zeroH;
         var l2 = zeroH;
         if (ohlc.o > ohlc.c) {
@@ -20113,7 +20113,7 @@
         }
         var yRatio = this.invertedYRatio;
         var realIndex = indexes.realIndex;
-        var ohlc = this.getOHLCValue(realIndex, j);
+        var ohlc = this.getOHLCvalue(realIndex, j);
         var l1 = zeroW;
         var l2 = zeroW;
         var x1 = Math.min(ohlc.o, ohlc.c);
@@ -20153,8 +20153,8 @@
         };
       }
     }, {
-      key: "getOHLCValue",
-      value: function getOHLCValue(i, j) {
+      key: "getOHLCvalue",
+      value: function getOHLCvalue(i, j) {
         var w = this.w;
         return {
           o: this.isBoxPlot ? w.globals.seriesCandleH[i][j] : w.globals.seriesCandleO[i][j],
@@ -23653,7 +23653,7 @@
    *
    * Bruls, Mark; Huizing, Kees; van Wijk, Jarke J. (2000), "Squarified treemaps"
    * in de Leeuw, W.; van Liere, R., Data Visualization 2000:
-   * Proc. Joint Eurographics and IEEE TCVG Symp. on Visualization, Springer-Verlag, pp. 33–42.
+   * Proc. Joint Eurographics and IEEE TCvG Symp. on Visualization, Springer-Verlag, pp. 33–42.
    *
    * Paper is available online at: http://www.win.tue.nl/~vanwijk/stm.pdf
    *

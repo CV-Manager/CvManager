@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using CvManager.Data;
 using CvManager.Interfaces;
 using CvManager.Models;
-using System.Threading.Tasks;
 using CvManager.ViewModels;
 
 namespace CvManager.Services
@@ -16,7 +15,7 @@ namespace CvManager.Services
             _context = context;
         }
 
-        public async Task<User?> Login(LoginVM user)
+        public async Task<User> Login(LoginVM user)
         {
             // Busca el usuario por correo electrónico
             User? userFind = await _context.Users
@@ -26,7 +25,7 @@ namespace CvManager.Services
             // Si el usuario no existe, retorna null
             if (userFind == null)
             {
-                return null;
+                return null!;
             }
 
             // Si el usuario se registró con Google, simplemente retorna el usuario
@@ -42,7 +41,7 @@ namespace CvManager.Services
             }
 
             // Si no coincide la contraseña, retorna null
-            return null;
+            return null!;
         }
         
         public async Task<User> Register(RegisterVM user)

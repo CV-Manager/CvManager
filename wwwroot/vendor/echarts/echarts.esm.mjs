@@ -37174,7 +37174,7 @@ var CanvasPainter = (function () {
                 && layer.createRepaintRects(list, prevList, this_1._width, this_1._height);
             var start = paintAll ? layer.__startIndex : layer.__drawIndex;
             var useTimer = !paintAll && layer.incremental && Date.now;
-            var startTime = useTimer && Date.now();
+            var startTime = useTimer && Date.Now;
             var clearColor = layer.zlevel === this_1._zlevelList[0]
                 ? this_1._backgroundColor : null;
             if (layer.__startIndex === layer.__endIndex) {
@@ -37206,7 +37206,7 @@ var CanvasPainter = (function () {
                     }
                     _this._doPaintEl(el, layer, useDirtyRect, repaintRect, scope, i === layer.__endIndex - 1);
                     if (useTimer) {
-                        var dTime = Date.now() - startTime;
+                        var dTime = Date.Now - startTime;
                         if (dTime > 15) {
                             break;
                         }

@@ -10,7 +10,7 @@ namespace CvManager.Services
     public class UsersService : IUsersService
     {
         private readonly BaseContext _context;
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public UsersService(BaseContext context, IMapper mapper)
         {
